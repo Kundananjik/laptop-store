@@ -1,0 +1,277 @@
+/* --- Global Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Use a clean, neutral background */
+  font-family: Arial, sans-serif; /* laptop store often uses derivatives of Arial/Helvetica */
+  background: #eaeded; /* Light background for the main content area */
+  color: #111; /* Dark text for readability */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Header (laptop store Navbar Blue) --- */
+header {
+  background-color: #131921; /* laptop store dark navbar color */
+  color: white;
+  text-align: center;
+  padding: 15px 20px; /* Reduced padding to resemble a typical compact navbar */
+}
+
+header h1 {
+  font-size: 2.0rem; /* Slightly smaller for a navbar logo */
+  margin-bottom: 5px;
+  /* Add a yellow/orange highlight to represent the smile/logo element */
+  color: #ff9900; 
+}
+
+header p {
+  font-size: 0.9rem; /* Smaller text for a subtitle */
+}
+
+/* --- Form Section (Search/Filter Bar) --- */
+.form-section {
+  background: #f0f2f5; /* Lighter background to separate it from the body */
+  padding: 15px 20px;
+  margin: 0 auto; /* Remove top/bottom margin, typically sits right below the header */
+  border-radius: 0; /* No rounded corners, a starker look */
+  max-width: 100%; /* Full width for a search bar */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle bottom shadow */
+}
+
+.form-section h2 {
+  text-align: center;
+  color: #111;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 950px;
+  margin: 0 auto; /* Center the form fields */
+}
+
+.form input {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #a6a6a6; /* Subtle grey border */
+  min-width: 150px;
+  flex: 1;
+}
+
+.form button {
+  /* laptop store Search Button Yellow/Orange */
+  background-color: #f7dfa5; 
+  color: #111;
+  border: 1px solid #a6a6a6;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form button:hover {
+  /* Darker/more intense orange on hover */
+  background-color: #f2c792; 
+}
+
+/* --- Laptop Cards (Product Listings) --- */
+.laptops-section {
+  flex: 1;
+  max-width: 1200px; /* Wider content area */
+  margin: 20px auto;
+  padding: 0 15px; /* Added internal padding */
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  /* Increased min width for a bigger product card */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 20px;
+  padding: 0;
+}
+
+li {
+  background: white;
+  border-radius: 8px; /* Slightly softer corners */
+  padding: 15px;
+  /* Very subtle shadow, laptop store often uses borders more than strong shadows */
+  box-shadow: 0 0 5px rgba(0,0,0,0.05); 
+  border: 1px solid #ddd; /* Added light border */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text left, typical for product listings */
+  text-align: left;
+}
+
+li img {
+  width: 100%;
+  height: 200px; /* Taller image for better display */
+  object-fit: contain; /* Use 'contain' to show the whole product without cropping */
+  border-radius: 0;
+  margin-bottom: 15px;
+}
+
+li strong {
+  font-size: 16px;
+  color: #007185; /* laptop store link blue/green for the product name */
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+li p {
+  margin: 3px 0;
+  font-size: 13px;
+  color: #565959;
+}
+
+.price-badge {
+  /* laptop store's distinctive price color - Red */
+  background-color: transparent; 
+  color: #cc0c39;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 8px 0;
+  padding: 0;
+  display: block;
+}
+
+.quantity {
+  font-size: 13px;
+  margin: 3px 0 10px 0;
+  color: #767676;
+}
+
+/* --- Action Buttons (Add to Cart) --- */
+li button {
+  margin-top: auto; /* Pushes the buttons to the bottom of the card */
+  width: 100%;
+  padding: 8px;
+  border-radius: 12px; /* Pill-shaped buttons are very laptop store-esque */
+  border: 1px solid #a6a6a6;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+li button.delete {
+  /* Update to a standard laptop store-style secondary button */
+  background-color: #fff; 
+  color: #111;
+  order: 2; /* Move delete button after update/add */
+}
+
+li button.delete:hover {
+  background-color: #f7fafa;
+}
+
+li button.update {
+  /* This is the primary 'Add to Cart' style - laptop store Yellow/Orange */
+  background-color: #ffd814; 
+  color: #111;
+  border-color: #fcd200;
+  margin-left: 0;
+  margin-bottom: 5px;
+  order: 1; /* Keep the primary action first */
+}
+
+li button.update:hover {
+  background-color: #f7ca00;
+}
+
+
+/* --- Footer (laptop store Footer Dark Blue) --- */
+footer {
+  background: #232f3e; /* laptop store's darker footer color */
+  color: white;
+  text-align: center;
+  padding: 25px 20px;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: 0.8rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .form {
+    flex-direction: column;
+  }
+
+  li {
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
+  }
+
+  li img {
+    height: 150px;
+    object-fit: contain;
+  }
+}
+
+/* --- Cart Sidebar --- */
+#cartSidebar {
+  position: fixed;
+  right: 0;
+  top: 60px; /* Adjusted to sit below the smaller header */
+  width: 300px;
+  background: #fff;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: -3px 0 6px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+#cartSidebar h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+#cartSidebar ul {
+  list-style: none;
+  padding: 0;
+  display: block; /* Override grid layout for the cart list */
+}
+
+#cartSidebar li {
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee; /* Light separator */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none; /* Remove card shadow */
+  border-radius: 0;
+  text-align: left;
+}
+
+#cartSidebar button {
+  /* 'Delete' button style in the cart */
+  background-color: #fff;
+  color: #007185;
+  border: 1px solid #a6a6a6;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+#cartSidebar button:hover {
+  background-color: #f7fafa;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Laptop Store</h1>
+  <p>Your one-stop shop for the best laptops!</p>
+</header>
+
+<!-- Add Laptop Form -->
+<section class="form-section">
+  <h2>Add a New Laptop</h2>
+  <div class="form">
+    <input type="text" id="title" placeholder="Laptop Title">
+    <input type="number" id="price" placeholder="Price">
+    <input type="number" id="quantity" placeholder="Quantity">
+    <input type="text" id="description" placeholder="Description">
+    <input type="file" id="image">
+    <button id="addLaptop">Add Laptop</button>
+  </div>
+</section>
+
+<!-- Laptop List -->
+<section class="laptops-section">
+  <h2>Available Laptops</h2>
+  <ul id="laptopList"></ul>
+</section>
+
+<!-- Cart Sidebar -->
+<aside id="cartSidebar">
+  <button id="closeCartBtn">&times; Close</button> <!-- Optional close button -->
+  <h2>Shopping Cart</h2>
+  <ul id="cartList"></ul>
+  <p>Total: $<span id="cartTotal">0</span></p>
+  <button id="checkoutBtn">Checkout</button>
+</aside>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Laptop Store. All rights reserved.</p>
+  <p>Made by Kundananji</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
