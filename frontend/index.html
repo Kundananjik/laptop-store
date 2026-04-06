@@ -6,48 +6,151 @@
 <title>Laptop Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="storefront">
+<header class="site-header">
+  <div class="brand-bar">
+    <div class="brand-mark">
+      <div class="brand-orb" aria-hidden="true"></div>
+      <div class="brand-copy">
+        <h1>Laptop Store</h1>
+        <p>Curated machines for work, play, and sharp everyday setups.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="top-pill">Live inventory and session cart</div>
+    </div>
+  </div>
 
-<!-- Header -->
-<header>
-  <h1>Laptop Store</h1>
-  <p>Your one-stop shop for the best laptops!</p>
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="hero-kicker">Storefront</span>
+      <h2>Modern hardware deserves a cleaner stage.</h2>
+      <p>
+        Browse the catalog, tune filters, add items to cart, and check out from one refined workspace.
+        Product management now lives in a dedicated admin page instead of sharing this customer view.
+      </p>
+      <ul class="hero-stats">
+        <li><strong>6</strong><span>device categories</span></li>
+        <li><strong>Real</strong><span>backend cart flow</span></li>
+        <li><strong>Split</strong><span>storefront and admin</span></li>
+      </ul>
+    </div>
+    <div class="hero-panel">
+      <div class="feature-card">
+        <h3>Faster browsing</h3>
+        <p>Search, filter, compare specs, and keep cart decisions close to the product grid.</p>
+      </div>
+      <div class="editorial-card">
+        <h3>Cleaner customer flow</h3>
+        <p>The storefront now focuses on discovery and checkout, while inventory edits live in the admin surface.</p>
+      </div>
+    </div>
+  </section>
 </header>
 
-<!-- Add Laptop Form -->
-<section class="form-section">
-  <h2>Add a New Laptop</h2>
-  <div class="form">
-    <input type="text" id="title" placeholder="Laptop Title">
-    <input type="number" id="price" placeholder="Price">
-    <input type="number" id="quantity" placeholder="Quantity">
-    <input type="text" id="description" placeholder="Description">
-    <input type="file" id="image">
-    <button id="addLaptop">Add Laptop</button>
+<div class="page-shell">
+  <main class="main-column">
+    <section class="filters-section panel">
+      <div class="section-head">
+        <div>
+          <h2>Catalog Controls</h2>
+          <p>Trim the inventory by brand, category, price window, and stock status before you browse.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <input type="text" id="search" placeholder="Search by title, brand, processor">
+        <input type="text" id="filterBrand" placeholder="Filter by brand">
+        <select id="filterCategory">
+          <option value="">All categories</option>
+          <option value="gaming">Gaming</option>
+          <option value="business">Business</option>
+          <option value="ultrabook">Ultrabook</option>
+          <option value="student">Student</option>
+          <option value="creator">Creator</option>
+          <option value="general">General</option>
+        </select>
+        <input type="number" id="minPrice" placeholder="Min price">
+        <input type="number" id="maxPrice" placeholder="Max price">
+        <select id="sort">
+          <option value="createdAt">Newest</option>
+          <option value="price">Price</option>
+          <option value="title">Title</option>
+          <option value="quantity">Stock</option>
+        </select>
+        <select id="order">
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+        <label class="stock-toggle">
+          <input type="checkbox" id="inStock">
+          In stock only
+        </label>
+        <button id="applyFilters">Apply Filters</button>
+      </div>
+    </section>
+
+    <section class="laptops-section">
+      <div class="section-head">
+        <div>
+          <h2>Available Laptops</h2>
+          <p>Browse the current collection, open detailed product pages, and add items to cart.</p>
+        </div>
+      </div>
+      <ul id="laptopList"></ul>
+    </section>
+    <section class="orders-section panel">
+      <div class="section-head">
+        <div>
+          <h2>Recent Orders</h2>
+          <p>Your session order history appears here after successful checkout.</p>
+        </div>
+      </div>
+      <ul id="orderList" class="order-list"></ul>
+    </section>
+  </main>
+
+  <aside id="cartSidebar">
+    <div class="cart-topline">
+      <h2>Shopping Cart</h2>
+      <span>Session synced</span>
+    </div>
+    <ul id="cartList"></ul>
+    <div class="cart-summary">
+      <div>
+        <div class="cart-summary-label">Current total</div>
+        <div class="cart-summary-value">$<span id="cartTotal">0</span></div>
+      </div>
+      <p class="cart-summary-note">Items stay in this session until you update quantities or check out.</p>
+    </div>
+    <div class="checkout-form">
+      <input type="text" id="customerFullName" placeholder="Full name">
+      <input type="email" id="customerEmail" placeholder="Email address">
+      <input type="text" id="customerPhone" placeholder="Phone number">
+      <textarea id="customerAddress" placeholder="Delivery address"></textarea>
+    </div>
+    <button id="checkoutBtn">Checkout</button>
+    <p id="cartMessage" class="cart-message"></p>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-card">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true"></span>
+      <div>
+        <h2>Laptop Store</h2>
+        <p>Inventory, cart, and checkout in one clean workspace.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Built by Kundananji</p>
+      <p id="footerDate">Loading date...</p>
+      <p>&copy; <span id="footerYear"></span> Laptop Store</p>
+    </div>
   </div>
-</section>
-
-<!-- Laptop List -->
-<section class="laptops-section">
-  <h2>Available Laptops</h2>
-  <ul id="laptopList"></ul>
-</section>
-
-<!-- Cart Sidebar -->
-<aside id="cartSidebar">
-  <button id="closeCartBtn">&times; Close</button> <!-- Optional close button -->
-  <h2>Shopping Cart</h2>
-  <ul id="cartList"></ul>
-  <p>Total: $<span id="cartTotal">0</span></p>
-  <button id="checkoutBtn">Checkout</button>
-</aside>
-
-<!-- Footer -->
-<footer>
-  <p>&copy; 2025 Laptop Store. All rights reserved.</p>
-  <p>Made by Kundananji</p>
 </footer>
 
+<div class="toast-region" id="toastRegion"></div>
 <script src="script.js"></script>
 </body>
 </html>

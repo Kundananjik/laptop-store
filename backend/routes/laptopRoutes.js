@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/laptopController");
+const { requireAdmin } = require("../middleware/requireAdmin");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -23,13 +24,26 @@ const storage = multer.diskStorage({
 });
 
 // Initialize upload middleware
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype && file.mimetype.startsWith("image/")) {
+      cb(null, true);
+      return;
+    }
+
+    cb(new Error("Only image uploads are allowed"));
+  },
+});
 
 // Routes
-router.post("/", upload.single("image"), controller.createLaptop);
+router.post("/", requireAdmin, upload.single("image"), controller.createLaptop);
 router.get("/", controller.getLaptops);
 router.get("/:id", controller.getLaptop);
-router.put("/:id", controller.updateLaptop);
-router.delete("/:id", controller.deleteLaptop);
+router.put("/:id", requireAdmin, upload.single("image"), controller.updateLaptop);
+router.delete("/:id", requireAdmin, controller.deleteLaptop);
 
 module.exports = router;

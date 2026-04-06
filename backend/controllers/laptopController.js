@@ -1,70 +1,82 @@
 const Laptop = require("../models/Laptop");
+const { deleteUpload } = require("../utils/files");
+const { buildLaptopQuery, normalizeLaptopPayload } = require("../utils/laptopValidation");
 
 // Create Laptop
-exports.createLaptop = async (req, res) => {
+exports.createLaptop = async (req, res, next) => {
   try {
-    const { title, description, price, quantity } = req.body;
-    if (!title || price === undefined) {
-      return res.status(400).json({ error: "Title and price required" });
-    }
+    const payload = normalizeLaptopPayload(req.body);
 
-    // Handle image
     const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
     const laptop = new Laptop({
-      title,
-      description,
-      price,
-      quantity,
+      ...payload,
       image: imagePath,
     });
 
     const savedLaptop = await laptop.save();
     res.status(201).json(savedLaptop);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
 // Get all Laptops
-exports.getLaptops = async (req, res) => {
+exports.getLaptops = async (req, res, next) => {
   try {
-    const laptops = await Laptop.find();
+    const { filters, sort } = buildLaptopQuery(req.query);
+    const laptops = await Laptop.find(filters).sort(sort);
     res.json(laptops);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
 // Get single Laptop
-exports.getLaptop = async (req, res) => {
+exports.getLaptop = async (req, res, next) => {
   try {
     const laptop = await Laptop.findById(req.params.id);
     if (!laptop) return res.status(404).json({ error: "Laptop not found" });
     res.json(laptop);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
 // Update Laptop
-exports.updateLaptop = async (req, res) => {
+exports.updateLaptop = async (req, res, next) => {
   try {
-    const updated = await Laptop.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ error: "Laptop not found" });
+    const payload = normalizeLaptopPayload(req.body, { partial: true });
+    const existingLaptop = await Laptop.findById(req.params.id);
+    if (!existingLaptop) return res.status(404).json({ error: "Laptop not found" });
+
+    if (req.file) {
+      payload.image = `/uploads/${req.file.filename}`;
+    }
+
+    const updated = await Laptop.findByIdAndUpdate(req.params.id, payload, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (req.file && existingLaptop.image && existingLaptop.image !== updated.image) {
+      await deleteUpload(existingLaptop.image);
+    }
+
     res.json(updated);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 
 // Delete Laptop
-exports.deleteLaptop = async (req, res) => {
+exports.deleteLaptop = async (req, res, next) => {
   try {
     const deleted = await Laptop.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ error: "Laptop not found" });
+    await deleteUpload(deleted.image);
     res.json({ message: "Laptop deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };

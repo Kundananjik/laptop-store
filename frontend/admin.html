@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Store Admin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin">
+<header class="site-header">
+  <div class="brand-bar">
+    <div class="brand-mark">
+      <div class="brand-orb" aria-hidden="true"></div>
+      <div class="brand-copy">
+        <h1>Laptop Store Admin</h1>
+        <p>Manage inventory, pricing, specs, and stock from a dedicated workspace.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="top-pill">Product studio and stock control</div>
+      <div class="top-links">
+        <a class="top-link" href="index.html">Open Storefront</a>
+        <button class="top-link top-link-button" id="adminLogoutBtn" type="button" hidden>Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="hero-kicker">Admin</span>
+      <h2>Keep the catalog sharp and current.</h2>
+      <p>
+        Add new machines, revise specs, adjust stock, and remove outdated items without exposing admin controls in the storefront.
+      </p>
+      <ul class="hero-stats">
+        <li><strong>Edit</strong><span>product details</span></li>
+        <li><strong>Restock</strong><span>inventory quickly</span></li>
+        <li><strong>Control</strong><span>catalog quality</span></li>
+      </ul>
+    </div>
+    <div class="hero-panel">
+      <div class="feature-card">
+        <h3>Dedicated workspace</h3>
+        <p>Customer browsing stays separate while admin operations remain faster and easier to review.</p>
+      </div>
+      <div class="editorial-card">
+        <h3>Product operations</h3>
+        <p>Create listings, update specs, and manage stock from one focused page.</p>
+      </div>
+    </div>
+  </section>
+</header>
+
+<section class="admin-login-wrap" id="adminLoginWrap">
+  <div class="admin-login-card">
+    <h2>Admin Access</h2>
+    <p>Enter the admin password to manage catalog inventory.</p>
+    <div class="admin-login-form">
+      <input type="password" id="adminPassword" placeholder="Admin password">
+      <button id="adminLoginBtn" type="button">Unlock Admin</button>
+    </div>
+    <p class="admin-login-message" id="adminLoginMessage"></p>
+  </div>
+</section>
+
+<div class="admin-shell" id="adminShell" hidden>
+  <main class="main-column">
+    <section class="form-section panel">
+      <div class="section-head">
+        <div>
+          <h2>Product Studio</h2>
+          <p>Create a new listing or switch into edit mode to revise an existing product.</p>
+        </div>
+      </div>
+      <div class="form">
+        <input type="hidden" id="editingLaptopId">
+        <input type="text" id="title" placeholder="Laptop Title">
+        <input type="text" id="brand" placeholder="Brand">
+        <select id="category">
+          <option value="">Category</option>
+          <option value="gaming">Gaming</option>
+          <option value="business">Business</option>
+          <option value="ultrabook">Ultrabook</option>
+          <option value="student">Student</option>
+          <option value="creator">Creator</option>
+          <option value="general">General</option>
+        </select>
+        <input type="text" id="processor" placeholder="Processor">
+        <input type="number" id="price" placeholder="Price">
+        <input type="number" id="quantity" placeholder="Quantity">
+        <input type="number" id="ramGb" placeholder="RAM (GB)">
+        <input type="number" id="storageGb" placeholder="Storage (GB)">
+        <input type="text" id="description" placeholder="Description">
+        <input type="file" id="image">
+        <button id="addLaptop">Add Laptop</button>
+        <button id="cancelEdit" type="button" hidden>Cancel Edit</button>
+      </div>
+    </section>
+
+    <section class="filters-section panel">
+      <div class="section-head">
+        <div>
+          <h2>Catalog Controls</h2>
+          <p>Search, filter, and sort inventory before editing or restocking individual products.</p>
+        </div>
+        <div class="view-toggle">
+          <button id="adminGridViewBtn" class="toggle-button is-active" type="button">Grid</button>
+          <button id="adminListViewBtn" class="toggle-button" type="button">List</button>
+        </div>
+      </div>
+      <div class="filters">
+        <input type="text" id="search" placeholder="Search by title, brand, processor">
+        <input type="text" id="filterBrand" placeholder="Filter by brand">
+        <select id="filterCategory">
+          <option value="">All categories</option>
+          <option value="gaming">Gaming</option>
+          <option value="business">Business</option>
+          <option value="ultrabook">Ultrabook</option>
+          <option value="student">Student</option>
+          <option value="creator">Creator</option>
+          <option value="general">General</option>
+        </select>
+        <input type="number" id="minPrice" placeholder="Min price">
+        <input type="number" id="maxPrice" placeholder="Max price">
+        <select id="sort">
+          <option value="createdAt">Newest</option>
+          <option value="price">Price</option>
+          <option value="title">Title</option>
+          <option value="quantity">Stock</option>
+        </select>
+        <select id="order">
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+        <label class="stock-toggle">
+          <input type="checkbox" id="inStock">
+          In stock only
+        </label>
+        <button id="applyFilters">Apply Filters</button>
+      </div>
+    </section>
+
+    <section class="laptops-section">
+      <div class="section-head">
+        <div>
+          <h2>Inventory Grid</h2>
+          <p>Use edit, delete, and restock directly from the product cards below.</p>
+        </div>
+      </div>
+      <ul id="laptopList"></ul>
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-card">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true"></span>
+      <div>
+        <h2>Laptop Store Admin</h2>
+        <p>Catalog operations separated from storefront browsing.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Built by Kundananji</p>
+      <p id="footerDate">Loading date...</p>
+      <p>&copy; <span id="footerYear"></span> Laptop Store</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-region" id="toastRegion"></div>
+<script src="script.js"></script>
+</body>
+</html>

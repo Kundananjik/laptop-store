@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Store Product</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="product">
+<header class="site-header">
+  <div class="brand-bar">
+    <div class="brand-mark">
+      <div class="brand-orb" aria-hidden="true"></div>
+      <div class="brand-copy">
+        <h1>Laptop Store</h1>
+        <p>Product details and purchase flow.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="top-pill">Focused product view</div>
+      <div class="top-links">
+        <a class="top-link" href="index.html">Back to Storefront</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="product-shell">
+  <section class="product-detail panel" id="productDetail">
+    <p class="empty-state">Loading product...</p>
+  </section>
+  <section class="orders-section panel">
+    <div class="section-head">
+      <div>
+        <h2>Recent Orders</h2>
+        <p>Your session order history appears here after checkout.</p>
+      </div>
+    </div>
+    <ul id="orderList" class="order-list"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+    <div class="footer-brand">
+      <span class="footer-mark" aria-hidden="true"></span>
+      <div>
+        <h2>Laptop Store</h2>
+        <p>Product overview, specs, and direct add-to-cart flow.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Built by Kundananji</p>
+      <p id="footerDate">Loading date...</p>
+      <p>&copy; <span id="footerYear"></span> Laptop Store</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-region" id="toastRegion"></div>
+<script src="script.js"></script>
+</body>
+</html>
